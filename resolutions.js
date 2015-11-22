@@ -5,26 +5,39 @@ if (Meteor.isClient) {
 
   Template.body.helpers({
     resolutions: function () {
-      return Resolutions.find();
+    if(Session.get('hideFinished'))
+      {return Resolutions.find({checked:{$ne: true}})
+    }
+      else {
+        return Resolutions.find();
+      }
+    },
+    hideFinished : function() {
+    return Session.get('hideFinished');
     }
   });
 
-  Template.body.events({
-'submit .new-resolution' : function(event) {
+Template.body.events({
+  'submit .new-resolution' : function(event) {
   var resolutionText = event.target.title.value;
   Resolutions.insert({title:resolutionText, createdAt: new Date()});
   event.target.title.value="";
   return false;
-}
+  },
+  'change .hide-finished' : function(event) {
+  Session.set('hideFinished',event.target.checked);
+  }
   });
-  Template.resolution.events({
-'click .delete' : function() {
-Resolutions.remove(this._id);
-},
-'click .toggle-checked' : function() {
+
+
+Template.resolution.events({
+  'click .delete' : function() {
+  Resolutions.remove(this._id);
+  },
+  'click .toggle-checked' : function() {
   var currentResolution = this._id;
   Resolutions.update(currentResolution,{$set:{checked:!this.checked}});
-}
+  }
   });
 
 }

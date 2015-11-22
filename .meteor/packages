@@ -21,3 +21,4 @@ insecure                # Allow all DB writes from clients (for prototyping)
 stolinski:stylus-multi
 accounts-password
 accounts-ui
+accounts-twitter

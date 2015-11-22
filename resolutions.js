@@ -83,7 +83,7 @@ Meteor.methods({
   },
   updateResolution:function(resolutionId,chk)
   {
-      var res = Resolutions.findOne(id);
+      var res = Resolutions.findOne(resolutionId);
       if(res.owner !== Meteor.userId())
       throw new Meteor.error('not-authorized');
       Resolutions.update(resolutionId,{$set:{checked:chk}});

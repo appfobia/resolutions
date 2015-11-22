@@ -8,18 +8,20 @@
       <h1>Monthly resolutions</h1>
 <lable class="hide-finished">
 <input type="checkbox" checked={{hideFinished}}> Hide finished resolutions</lable>
+{{#if currentUser}}
       <form class="new-resolution">
         <input type="text" name="title" placeholder="A new resolution">
         <input class="submit" type="submit" name="Submit">
       </form>
+{{/if}}
     </header>
     <ul>
       {{#each resolutions}}
       {{>resolution}}
       {{/each}}
     </ul>
+    {{> loginButtons}}
   </div>
-
 </body>
 
 <template name="resolution">

@@ -5,40 +5,44 @@
 <body>
   <div class="container">
     <header>
-      <h1>Monthly resolutions</h1>
+      <h1>Bucket List Of Resolutions</h1>
 <lable class="hide-finished">
 <input type="checkbox" checked={{hideFinished}}> Hide finished resolutions</lable>
+<h4>(As this is an example site, the posts may take 2-3 secs to load for the first time.)</h4>
+</header>
 {{#if currentUser}}
-      <form class="new-resolution">
-        <input type="text" name="title" placeholder="A new resolution">
-        <input class="submit" type="submit" name="Submit">
-      </form>
+<ul>
+  <li>
+          <form class="new-resolution">
+            <input type="text" name="title" placeholder="A new resolution">
+            <input class="submit" type="submit" name="Submit">
+          </form>
+  </li>
+</ul>
 {{/if}}
-    </header>
+
     <ul>
       {{#each resolutions}}
       {{>resolution}}
       {{/each}}
     </ul>
-    {{> loginButtons}}
+    <div class="loginClass">
+      {{> loginButtons}}
+    </div>
   </div>
 </body>
 
 <template name="resolution">
    <li class="{{#if checked}} checked {{/if}}">
-     {{#if isOwner}}
-     <input type="checkbox" checked={{checked}}  class="toggle-checked">
-       <button class="toggle-private">
+     <input type="checkbox" checked={{checked}} disabled={{!isOwner}} class="toggle-checked">
+       <button class="toggle-private {{isDisabled}}">
        {{#if private}}
        Private
        {{else}}
        Public
        {{/if}}
        </button>
-     {{/if}}
      <span class="text">{{title}}</span>
-     {{#if isOwner}}
-     <button class="delete">Remove</button>
-     {{/if}}
+     <button class="delete {{isDisabled}}">Remove</button>
    </li>
 </template>

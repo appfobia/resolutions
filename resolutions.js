@@ -35,6 +35,12 @@ Template.body.events({
   Template.resolution.helpers({
     isOwner: function() {
       return  this.owner === Meteor.userId();
+    },
+    isDisabled: function() {
+      if(this.owner === Meteor.userId())
+      return  "";
+      else
+        return "falseColor";
     }
   });
 

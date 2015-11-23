@@ -74,9 +74,9 @@ Meteor.methods({
   addResolution: function(title) {
     Resolutions.insert({title:title, createdAt: new Date(), owner: Meteor.userId()});
   },
-  removeResolution:function(resolutionId)
+  removeResolution: function(resolutionId)
   {
-    var res = Resolutions.findOne(id);
+    var res = Resolutions.findOne(resolutionId);
     if(res.owner !== Meteor.userId())
     throw new Meteor.error('not-authorized');
     Resolutions.remove(resolutionId);

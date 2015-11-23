@@ -25,7 +25,7 @@ Template.body.events({
   var resolutionText = event.target.title.value;
   Meteor.call('addResolution',resolutionText);
   event.target.title.value="";
-  return false;
+  event.preventDefault();
   },
   'change .hide-finished' : function(event) {
   Session.set('hideFinished',event.target.checked);
@@ -38,20 +38,35 @@ Template.body.events({
     },
     isDisabled: function() {
       if(this.owner === Meteor.userId())
-      return  "";
+        return  "";
       else
         return "falseColor";
+    },
+    isCurrentUser: function() {
+      if(Meteor.userId() && this.owner === Meteor.userId() )
+        return false;
+      else
+        return true;
+    },
+    buttonDisable: function() {
+      if(this.owner === Meteor.userId())
+        return  false;
+      else
+        return true;
     }
   });
 
 Template.resolution.events({
   'click .delete' : function() {
+    if(this.owner === Meteor.userId())
   Meteor.call('removeResolution',this._id);
   },
   'click .toggle-checked' : function() {
+    if(this.owner === Meteor.userId())
   Meteor.call('updateResolution',this._id,!this.checked);
   },
   'click .toggle-private' : function() {
+    if(this.owner === Meteor.userId())
   Meteor.call('setPrivate',this._id,!this.private);
   }
   });

@@ -34,8 +34,8 @@
 
 <template name="resolution">
    <li class="{{#if checked}} checked {{/if}}">
-     <input type="checkbox" checked={{checked}} disabled={{!isOwner}} class="toggle-checked">
-       <button class="toggle-private {{isDisabled}}">
+     <input type="checkbox" checked={{checked}} disabled={{isCurrentUser}} class="toggle-checked">
+       <button class="toggle-private {{isDisabled}}" disabled={{buttonDisable}}>
        {{#if private}}
        Private
        {{else}}
@@ -43,6 +43,6 @@
        {{/if}}
        </button>
      <span class="text">{{title}}</span>
-     <button class="delete {{isDisabled}}">Remove</button>
+     <button class="delete {{isDisabled}}" disabled={{buttonDisable}}>Remove</button>
    </li>
 </template>
